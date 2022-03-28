@@ -1,9 +1,9 @@
 #include"config.h"
 
-//È«¾Ö±äÁ¿ÉùÃ÷
+//å…¨å±€å˜é‡å£°æ˜
 extern  uint time_1;
 extern  uint time_2;
-extern  uchar data Tempdatatable[5],CommandDatatable[5];//Êı¾İ°ü
+extern  uchar data Tempdatatable[5],CommandDatatable[5];//æ•°æ®åŒ…
 
 void main()
 {
@@ -23,7 +23,7 @@ void main()
  	X_Axis_Stop();	 
 	while(1)
 	{
-		P2_6=~P2_6;					//Î´½øÈë¹¤×÷£¬Ö¸Ê¾²»Í£µÆÉÁË¸ 
+		P2_6=~P2_6;					//æœªè¿›å…¥å·¥ä½œï¼ŒæŒ‡ç¤ºä¸åœç¯é—ªçƒ 
 		Delay_ms(260);	
 	}						
 }

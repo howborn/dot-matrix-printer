@@ -1,22 +1,22 @@
 #include"config.h"
 
 /*****************************************************************
-//´®¿ÚÍ¨ĞÅÄ£¿é
+//ä¸²å£é€šä¿¡æ¨¡å—
 ******************************************************************/
- uchar Buffer =0;      //´Ó´®¿Ú½ÓÊÕµÄÊı¾İ
+ uchar Buffer =0;      //ä»ä¸²å£æ¥æ”¶çš„æ•°æ®
  uint i=0,j,URTAReceivedCount=0,n=1;
  bit busy;
- uchar data Tempdatatable[5],CommandDatatable[5];//Êı¾İ°ü
+ uchar data Tempdatatable[5],CommandDatatable[5];//æ•°æ®åŒ…
  
 /********************************************************************
-* Ãû³Æ : Com_Init()
-* ¹¦ÄÜ : ´®¿Ú³õÊ¼»¯,²¨ÌØÂÊ9600£¬Ê¹ÄÜÁË´®¿ÚÖĞ¶Ï
-* ÊäÈë : ÎŞ
-* Êä³ö : ÎŞ
+* åç§° : Com_Init()
+* åŠŸèƒ½ : ä¸²å£åˆå§‹åŒ–,æ³¢ç‰¹ç‡9600ï¼Œä½¿èƒ½äº†ä¸²å£ä¸­æ–­
+* è¾“å…¥ : æ— 
+* è¾“å‡º : æ— 
 ***********************************************************************/
 void Com_Init()
 {
-	TH2 = 0xFF;                 //9600²¨ÌØÂÊ,11.0592Mhz¾§Õñ 
+	TH2 = 0xFF;                 //9600æ³¢ç‰¹ç‡,11.0592Mhzæ™¶æŒ¯ 
 	TL2 = 0xDC;  
 	RCAP2H = 0xFF;  
 	RCAP2L = 0xDC;
@@ -24,26 +24,26 @@ void Com_Init()
 	SCON = 0x50;
 	T2CON=0x34;
 	TR2=1;
-	ES = 1;                     //Ê¹ÄÜ´®¿Ú1ÖĞ¶Ï
+	ES = 1;                     //ä½¿èƒ½ä¸²å£1ä¸­æ–­
 	EA = 1;
 }
 
 /********************************************************************
-* Ãû³Æ : Com_Int()
-* ¹¦ÄÜ : ´®¿ÚÖĞ¶Ï×Óº¯Êı
-* ÊäÈë : ÎŞ
-* Êä³ö : ÎŞ
+* åç§° : Com_Int()
+* åŠŸèƒ½ : ä¸²å£ä¸­æ–­å­å‡½æ•°
+* è¾“å…¥ : æ— 
+* è¾“å‡º : æ— 
 ***********************************************************************/
 void Com_Int() interrupt 4 using 1
 {
     if (RI)
     {       
         uchar temp;
-        RI = 0;                 //Çå³ıRIÎ»
+        RI = 0;                 //æ¸…é™¤RIä½
 		temp=SBUF;
 			if(temp==0XFF && URTAReceivedCount<2)
 			{	
-				Tempdatatable[0]=0xFF;  //°üÍ·
+				Tempdatatable[0]=0xFF;  //åŒ…å¤´
 				URTAReceivedCount++;
 			}
 				else
@@ -51,11 +51,11 @@ void Com_Int() interrupt 4 using 1
 				Tempdatatable[n]=temp;
 				n++;   
 			}
-		if(URTAReceivedCount==2&&n==4)//°üÎ²
+		if(URTAReceivedCount==2&&n==4)//åŒ…å°¾
 		{
 			Tempdatatable[4]=0XFF;
 			n=1;
-			URTAReceivedCount=0;  //×é°üÍê±Ï
+			URTAReceivedCount=0;  //ç»„åŒ…å®Œæ¯•
 		}
 		CommandDatatable[0]=Tempdatatable[0];
 		CommandDatatable[1]=Tempdatatable[1];
@@ -65,20 +65,20 @@ void Com_Int() interrupt 4 using 1
 	}
     if (TI)
     {
-        TI = 0;                 //Çå³ıTIÎ»
-        busy = 0;               //ÇåÃ¦±êÖ¾
+        TI = 0;                 //æ¸…é™¤TIä½
+        busy = 0;               //æ¸…å¿™æ ‡å¿—
     }
 }
 
 /********************************************************************
-* Ãû³Æ : Send_Data()
-* ¹¦ÄÜ : ÏòÉÏÎ»»ú´«ËÍ×Ö·û
-* ÊäÈë : ÎŞ
-* Êä³ö : ÎŞ
+* åç§° : Send_Data()
+* åŠŸèƒ½ : å‘ä¸Šä½æœºä¼ é€å­—ç¬¦
+* è¾“å…¥ : æ— 
+* è¾“å‡º : æ— 
 ***********************************************************************/
 void Send_Data(uchar data type,uchar data cmd,uchar data date)
 {   
-    uchar data Buffer[5]; //¹¹½¨Êı¾İ°ü	
+    uchar data Buffer[5]; //æ„å»ºæ•°æ®åŒ…	
 	uchar *p;
  	uint Send_Count=0;
     Buffer[0]=0XFF;
@@ -91,13 +91,13 @@ void Send_Data(uchar data type,uchar data cmd,uchar data date)
 	{
 		if(*p==0XFF)
 		{
-			Send_Count++;  //0XFF±êÖ¾Í³¼ÆÎ»
+			Send_Count++;  //0XFFæ ‡å¿—ç»Ÿè®¡ä½
 		}
 	while (busy); 
 	busy = 1;
 	SBUF=*p;
 	p++;          
-	if(Send_Count == 2)  //µ±Í³¼Æµ½Á½´Î³öÏÖ0XFF£¬ÔòÈÏÎªÒ»¸öÊı¾İ°ü·¢ËÍÍê±Ï£¬Ìø³öÑ­»·
+	if(Send_Count == 2)  //å½“ç»Ÿè®¡åˆ°ä¸¤æ¬¡å‡ºç°0XFFï¼Œåˆ™è®¤ä¸ºä¸€ä¸ªæ•°æ®åŒ…å‘é€å®Œæ¯•ï¼Œè·³å‡ºå¾ªç¯
 	{
 		break;    
 	}     

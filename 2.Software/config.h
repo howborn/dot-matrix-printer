@@ -17,7 +17,7 @@ extern  void Send_Data(uchar data type,uchar data cmd,uchar data date);
 
 sfr T2MOD=0x0c9;
 
-//²½½øµç»ú£¨xÖá£©ÅäÖÃ
+//æ­¥è¿›ç”µæœºï¼ˆxè½´ï¼‰é…ç½®
 sbit P1_0 = P1^0;
 sbit P1_1 = P1^1;
 sbit P1_2 = P1^2;
@@ -25,19 +25,19 @@ sbit P1_3 = P1^3;
 sbit P1_4 = P1^4;
 sbit P1_5 = P1^5;
 
-//Ö±Á÷µç»ú1£¨yÖá£©ÅäÖÃ
+//ç›´æµç”µæœº1ï¼ˆyè½´ï¼‰é…ç½®
 sbit P2_0 = P2^0;
 sbit P2_1 = P2^1;
 sbit P2_4 = P2^4;
 
-//Ö±Á÷µç»ú2ÅäÖÃ
+//ç›´æµç”µæœº2é…ç½®
 sbit P2_2 = P2^2;
 sbit P2_3 = P2^3;
 sbit P2_5 = P2^5;
 
-sbit P2_6 = P2^6;     //¹¤×÷Ö¸Ê¾µÆ
+sbit P2_6 = P2^6;     //å·¥ä½œæŒ‡ç¤ºç¯
 
-sbit P0_0 = P0^0;	  //´¥Åö¿ª¹Ø
+sbit P0_0 = P0^0;	  //è§¦ç¢°å¼€å…³
 sbit P0_1 = P0^1;
 sbit P0_6 = P0^6;
 sbit P0_7 = P0^7;

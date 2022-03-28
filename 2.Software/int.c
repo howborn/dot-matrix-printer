@@ -2,6 +2,6 @@
 
 void Main_Int()
 {
- 	Time_0_Int();					//¶¨Ê±Æ÷0³õÊ¼»¯
+ 	Time_0_Int();					//å®šæ—¶å™¨0åˆå§‹åŒ–
       Com_Init();
 }
