@@ -27,7 +27,3 @@
 ## [软件源码](https://github.com/howborn/dot-matrix-printer/blob/master/2.Software)
 
 只找到了下位机源码。
-
-## [相册](https://github.com/howborn/dot-matrix-printer/blob/master/3.Photos)
-
-![侧面](https://github.com/howborn/dot-matrix-printer/blob/master/3.Photos/侧面.jpg)
